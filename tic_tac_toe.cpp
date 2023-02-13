@@ -6,27 +6,19 @@ void clrscr(){
 }
 void show(char a[3][3]){
     cout<<"-===========-";
-    cout<<"\t\t-==============-"<<endl;
+    cout<<"\t\t-===========-"<<endl;
     cout<<"| "<<a[0][0]<<" | "<<a[0][1]<<" | "<<a[0][2]<<" |";
-    cout<<"\t\t| 11 | 12 | 13 |"<<endl;
+    cout<<"\t\t| 1 | 2 | 3 |"<<endl;
     cout<<"|===|===|===|";
-    cout<<"\t\t|====|====|====|"<<endl;
+    cout<<"\t\t|===|===|===|"<<endl;
     cout<<"| "<<a[1][0]<<" | "<<a[1][1]<<" | "<<a[1][2]<<" |";
-    cout<<"\t\t| 21 | 22 | 23 |"<<endl;
+    cout<<"\t\t| 4 | 5 | 6 |"<<endl;
     cout<<"|===|===|===|";
-    cout<<"\t\t|====|====|====|"<<endl;
+    cout<<"\t\t|===|===|===|"<<endl;
     cout<<"| "<<a[2][0]<<" | "<<a[2][1]<<" | "<<a[2][2]<<" |";
-    cout<<"\t\t| 31 | 32 | 33 |"<<endl;
+    cout<<"\t\t| 7 | 8 | 9 |"<<endl;
     cout<<"-===========-";
-    cout<<"\t\t-==============-"<<endl;
-}
-bool pos_comp(int pos,int* arr){
-    for(int i=0;i<9;i++){
-        if(arr[i]==pos){
-            return true;
-        }
-    }
-    return false;
+    cout<<"\t\t-===========-"<<endl;
 }
 int win_check(char s[3][3]){
     char key[]={'O','X'};
@@ -65,22 +57,23 @@ int main(){
         cout<<"It's "<<name[t%2]<<"'s Turn."<<endl;
         cout<<"Enter Position : ";
         cin>>pos;
-        j = pos%10 -1;
-        i = pos/10 -1;
-        while(i>2||j>2||i<0||j<0||pos_comp(pos,all_pos)){
+        pos--;
+        i = pos/3;
+        j = pos%3;
+        while(i>2||j>2||i<0||j<0|| s[i][j]!=' '){
             cout<<"Wrong Input\n";
             cout<<"Enter Position Again :";
             cin>>pos;
-        j = pos%10 -1;
-        i = pos/10 -1;
+            pos--;
+            i = pos/3;
+            j = pos%3;
         }
         s[i][j]= tic_tac[t%2];
-        all_pos[t]=pos;
         clrscr();
         show(s);
         int c=win_check(s);
         if(c){
-          cout<<"\n\t"<<name[c-1]<<" WON\n\n"<<c;
+          cout<<"\n\t"<<name[c-1]<<" WON\n\n";
           break;  
         }
         else if(t==8){

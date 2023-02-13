@@ -1,7 +1,7 @@
 import java.util.Scanner;
-class TicTacAditya 
+class TicTac
 {
-    public static void main(String args[])
+     public static void main(String args[])
     {
         Scanner ob=new Scanner(System.in);
         System.out.println("Enter Player 1 Name And His Choice:");
@@ -11,9 +11,7 @@ class TicTacAditya
         String p2=ob.next();
         String ch2=ob.next();
         System.out.print("\033[H\033[2J");
-        System.out.println("__GAME STARTS__");
-        System.out.println();
-        
+        System.out.println("__GAME STARTS__\n");
         display2();
         String [][] array=new String[4][4];
         borderset(array); 
@@ -27,7 +25,8 @@ class TicTacAditya
             break;
             
             if(c==9)
-            break;
+            break; 
+             
                   while(true)
                 {
                    if(r%2==0)
@@ -47,10 +46,9 @@ class TicTacAditya
                 System.out.print("\033[H\033[2J");
                  System.out.println("Wrong Input");
                  display2();
-                 System.out.println("After Round "+c);
-                 System.out.println();
+                 System.out.println("After Round "+c+"\n");
                  display(array);
-                 System.out.print("Again ");
+                System.out.print("Again ");
                  break;
                 }
                else if(array[j][k].equals(ch1)||array[j][k].equals(ch2))
@@ -58,10 +56,9 @@ class TicTacAditya
                     System.out.print("\033[H\033[2J");
                  System.out.println("Wrong Input");
                  display2();
-                 System.out.println("After Round "+c);
-                 System.out.println();
+                 System.out.println("After Round "+c+"\n");
                  display(array);
-                 System.out.print("Again ");
+                System.out.print("Again ");
                  break;
                 }
                 else
@@ -77,101 +74,60 @@ class TicTacAditya
                    System.out.println();
                   display(array);
                   r++;
-                 int p=checkarray(array,p1,p2,ch1,ch2,h);
-                   if(p==1)
+               int p=check(array,p1,p2,ch1,ch2,h);
+               {
+                if(p==1)
+ {
+    System.out.println("__GAME ENDS__\n"+p1+" Wins The Game");
+ }
+ else if(p==2)
+ {
+    System.out.println("__GAME ENDS__\n"+p2+" Wins The Game");
+ }
+               }
+                   if(p>=1)
                   flag=1;
                   break;
             }
     }
     }
         if(flag==0)
-        {
-             System.out.println("__GAME ENDS__");
-        System.out.println("Game Tied");
-    }
+        System.out.println("__GAME ENDS__\nGame Tied");
 }
-    public static int checkarray(String a[][],String p1,String p2,String ch1,String ch2,int h)
+public static int check(String a[][],String p1,String p2,String ch1,String ch2,int i)
+{
+    
+    String p[]={ch1,ch2};
+    int c=0,r=0;
+    for(i=0;i<2;i++)
     {
-        int c1=0,c2=0,t1=0,c=0;
-         if((a[1][1].concat(a[2][2]).concat(a[3][3])).equalsIgnoreCase("XXX"))
-        c1++;
-       else if((a[1][1].concat(a[2][2]).concat(a[3][3])).equalsIgnoreCase("OOO"))
-        c2++;
-      else if((a[1][1].concat(a[2][1]).concat(a[3][1])).equalsIgnoreCase("XXX"))
-        c1++;
-      else if((a[1][1].concat(a[2][1]).concat(a[3][1])).equalsIgnoreCase("OOO"))
-       c2++;
-       else if((a[1][1].concat(a[1][2]).concat(a[1][3])).equalsIgnoreCase("XXX"))
-        c1++;
-     else if((a[1][1].concat(a[1][2]).concat(a[1][3])).equalsIgnoreCase("OOO"))
-        c2++;
-        else if((a[1][3].concat(a[2][3]).concat(a[3][3])).equalsIgnoreCase("XXX"))
-        c1++;
-     else if((a[1][3].concat(a[2][3]).concat(a[3][3])).equalsIgnoreCase("OOO"))
-        c2++;
-       else if((a[3][1].concat(a[3][2]).concat(a[3][3])).equalsIgnoreCase("XXX"))
-        c1++;
-       else if((a[3][1].concat(a[3][2]).concat(a[3][3])).equalsIgnoreCase("OOO"))
-        c2++; 
-        else if((a[1][3].concat(a[2][2]).concat(a[3][1])).equalsIgnoreCase("XXX"))
-        c1++;
-        else if((a[1][3].concat(a[2][2]).concat(a[3][1])).equalsIgnoreCase("OOO"))
-        c2++;
-        else if((a[1][2].concat(a[2][2]).concat(a[3][2])).equalsIgnoreCase("XXX"))
-        c1++;
-        else if((a[1][2].concat(a[2][2]).concat(a[3][2])).equalsIgnoreCase("OOO"))
-        c2++;
-        else if((a[2][1].concat(a[2][2]).concat(a[2][3])).equalsIgnoreCase("XXX"))
-        c1++;
-        else if((a[2][1].concat(a[2][2]).concat(a[2][3])).equalsIgnoreCase("OOO"))
-        c2++;
-       
-        else
-        t1++;
-        
-        if(c1==1)
+        for(int k=1;k<4;k++)
         {
-            c=1;
-            if(ch1.equalsIgnoreCase("X"))
-            {
-             System.out.println("__GAME ENDS__");
-        System.out.println(p1+" Wins The Game");
-    }
-    else if(ch2.equalsIgnoreCase("X"))
-    {
-        System.out.println("__GAME ENDS__");
-        System.out.println(p2+" Wins The Game");
+            if(a[k][1].equals(p[i])&&a[k][2].equals(p[i])&&a[k][3].equals(p[i]))
+            return i+1;
+            if(a[1][k].equals(p[i])&&a[2][k].equals(p[i])&&a[3][k].equals(p[i]))
+            return i+1;
+        }
+            if(a[1][1].equals(p[i])&&a[2][2].equals(p[i])&&a[3][3].equals(p[i]))
+            return i+1;
+            if(a[1][3].equals(p[i])&&a[2][2].equals(p[i])&&a[3][1].equals(p[i]))
+            return i+1;
 }
-}
-        else if(c2==1)
-        {
-            c=1;
-            if(ch1.equalsIgnoreCase("O"))
-            {
-             System.out.println("__GAME ENDS__");
-        System.out.println(p1+" Wins The Game");
-    }
-    else if(ch2.equalsIgnoreCase("O"))
-    {
-    System.out.println("__GAME ENDS__");
-        System.out.println(p2+" Wins The Game");
-}
- }
-    return c;
+return 0;
 }
     public static void borderset(String array[][])
     { 
         for(int a=1;a<4;a++)
-{
-for(int b=1;b<4;b++)
-{
-    array[a][b]="|-";
-    System.out.print(array[a][b]);
+        {
+           for(int b=1;b<4;b++)
+            {
+              array[a][b]="|-";
+              System.out.print(array[a][b]);
+            }
+System.out.println("|\n");
+        }
 }
-System.out.println("|");
-System.out.println();
-} 
-}
+
 public static void display2()
 {
     for(int i=1;i<4;i++)
@@ -180,9 +136,8 @@ public static void display2()
     {
         System.out.print("|"+i+""+j);
     }
-    System.out.println("|");
-    System.out.println();
-    }
+    System.out.println("|\n");
+}
 }
  public static void display(String array[][])
 {
@@ -195,8 +150,7 @@ System.out.print("|"+array[a][b]);
 else
 System.out.print(array[a][b]);
 }
-System.out.println("|");
-System.out.println();
+System.out.println("|\n");
 }
 } 
 }

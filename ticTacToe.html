@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <title>ticTacToe</title>
+        <style>
+            button{
+                padding: 15px 15px;
+                text-align: center;
+                cursor:cell;
+            }
+        </style>
+        <script>
+            var s = [[],[],[]]
+            for(let i=0;i<3;i++){
+                for(let j=0;j<3;j++){
+                    s[i][j] = " "
+                }
+            }
+            const tic = ["O","X"]
+            var count = 0 
+            function winCheck(C){
+                key = tic[C%2]
+                for(let i=0;i<3;i++){
+                    if((s[i][0]==key)&&(s[i][1]==key)&&(s[i][2]==key)){
+                        return true
+                    }
+                    if((s[0][i]==key)&&(s[1][i]==key)&&(s[2][i]==key)){
+                        return true
+                    }
+                }
+                if((s[0][0]==key)&&(s[1][1]==key)&&(s[2][2]==key)){
+                    return true
+                }
+                if((s[0][2]==key)&&(s[1][1]==key)&&(s[2][0]==key)){
+                    return true
+                }
+            }
+            function ticTac(r,c){
+                let i = r*3 + c 
+                if(count<9 && (s[r][c]==" ")){
+                    tac = tic[count%2]
+                    document.getElementsByTagName("button")[i].innerHTML = tac
+                    document.getElementById("turn").innerHTML = "TURN : "+tic[(count+1)%2]
+                    document.getElementsByTagName("button")[i].style.padding = "7.5px 10px"
+                    s[r][c]= tac
+                    if(winCheck(count)){
+                        document.getElementById("turn").innerHTML = tac+": WON"
+                        count = 8
+                    }
+                    else if(count==8){
+                        document.getElementById("turn").innerHTML = "Game Draw"
+                    }
+                    count++
+                }
+            }
+            function reset(){
+                for(let i=0;i<3;i++){
+                  for(let j=0;j<3;j++){
+                    s[i][j] = " "
+                    }
+                }
+                for(let i=0;i<9;i++){
+                    document.getElementById("turn").innerHTML = "TURN : O"
+                    document.getElementsByTagName("button")[i].innerHTML = " "
+                    document.getElementsByTagName("button")[i].style.padding = "15px 15px"
+                }
+                count = 0
+            }
+        </script>
+    </head>
+    <body>
+        <table align="center">
+            <tr>
+                <th colspan ="3" id="turn">TURN : O</th>
+            </tr>
+            <tr>
+                <th><button onclick="ticTac(0,0)"></button></th>
+                <th><button onclick="ticTac(0,1)"></button></th>
+                <th><button onclick="ticTac(0,2)"></button></th>
+            </tr>
+            <tr>
+                <th><button onclick="ticTac(1,0)"></button></th>
+                <th><button onclick="ticTac(1,1)"></button></th>
+                <th><button onclick="ticTac(1,2)"></button></th>
+            </tr>
+            <tr>
+                <th><button onclick="ticTac(2,0)"></button></th>
+                <th><button onclick="ticTac(2,1)"></button></th>
+                <th><button onclick="ticTac(2,2)"></button></th>
+            </tr>
+                <th colspan ="3"><br><button onclick="reset()">Reset</button></th>
+            </tr>
+        </table>
+    </body>
+</html>
